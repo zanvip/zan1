@@ -2,10 +2,29 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <title>Redirecting...</title>
-  <meta http-equiv="refresh" content="0; url=g1/show.html">
+  <title>随机跳转中...</title>
+  <script>
+    // 定义你的 GitHub Pages 根路径
+    var base = "https://zanvip.github.io/zan1/";
+
+    // g1 到 g10
+    var folders = ["g1","g2","g3","g4","g5","g6","g7","g8","g9","g10"];
+
+    // 随机挑选一个
+    var target = folders[Math.floor(Math.random() * folders.length)];
+
+    // 拼接最终跳转地址
+    var url = base + target + "/show.html";
+
+    // 执行跳转
+    window.location.href = url;
+  </script>
 </head>
 <body>
-  <p>正在跳转，如果没有自动跳转，请 <a href="g1/show.html">点击这里</a></p>
+  <p>正在跳转，请稍候... <br> 如果没有自动跳转，请 <a id="link" href="#">点击这里</a></p>
+
+  <script>
+    document.getElementById("link").href = url;
+  </script>
 </body>
 </html>
