@@ -1,30 +1,326 @@
-<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <title>随机跳转中...</title>
-  <script>
-    // 定义你的 GitHub Pages 根路径
-    var base = "https://zanvip.github.io/zan1/";
+  <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport">
+  <meta content="yes" name="apple-mobile-web-app-capable">
+  <meta content="yes" name="apple-touch-fullscreen">
+  <meta content="black" name="apple-mobile-web-app-status-bar-style">
+  <meta content="320" name="MobileOptimized">
+  <title></title>
+<style>
+.container {
+        width: 100px;
+        height: 100px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
 
-    // g1 到 g10
-    var folders = ["g1","g2","g3","g4","g5","g6","g9","g10"];
+    .dot {
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background-color: #000;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+    }
 
-    // 随机挑选一个
-    var target = folders[Math.floor(Math.random() * folders.length)];
+    .dot-3 {
+        background-color: #f74d75;
+    }
 
-    // 拼接最终跳转地址
-    var url = base + target + "/show.html";
+    .dot-2 {
+        background-color: #10beae;
+    }
 
-    // 执行跳转
-    window.location.href = url;
-  </script>
-</head>
+    .dot-1 {
+        background-color: #ffe386;
+    }
+
+    .dot-3 {
+        background-color: #f74d75;
+        animation: dot-3-move 2s ease infinite;
+    }
+
+    @keyframes dot-3-move {
+        20% {
+            transform: scale(1)
+        }
+
+        45% {
+            transform: translateY(-18px) scale(.45)
+        }
+
+        60% {
+            transform: translateY(-25px) scale(.45)
+        }
+
+        80% {
+            transform: translateY(-25px) scale(.45)
+        }
+
+        100% {
+            transform: translateY(0px) scale(1)
+        }
+    }
+
+    .dot-2 {
+        background-color: #10beae;
+        animation: dot-2-move 2s ease infinite;
+    }
+
+    .dot-1 {
+        background-color: #ffe386;
+        animation: dot-1-move 2s ease infinite;
+    }
+
+    @keyframes dot-2-move {
+        20% {
+            transform: scale(1)
+        }
+
+        45% {
+            transform: translate(-16px, 12px) scale(.45)
+        }
+
+        60% {
+            transform: translate(-20px, 15px) scale(.45)
+        }
+
+        80% {
+            transform: translate(-20px, 15px) scale(.45)
+        }
+
+        100% {
+            transform: translateY(0px) scale(1)
+        }
+    }
+
+    @keyframes dot-1-move {
+        20% {
+            transform: scale(1)
+        }
+
+        45% {
+            transform: translate(16px, 12px) scale(.45)
+        }
+
+        60% {
+            transform: translate(20px, 15px) scale(.45)
+        }
+
+        80% {
+            transform: translate(20px, 15px) scale(.45)
+        }
+
+        100% {
+            transform: translateY(0px) scale(1)
+        }
+    }
+
+    .container {
+        width: 100px;
+        height: 100px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        animation: rotate-move 2s ease-in-out infinite;
+    }
+
+    @keyframes rotate-move {
+        55% {
+            transform: translate(-50%, -50%) rotate(0deg)
+        }
+
+        80% {
+            transform: translate(-50%, -50%) rotate(360deg)
+        }
+
+        100% {
+            transform: translate(-50%, -50%) rotate(360deg)
+        }
+    }
+.container {
+        width: 100px;
+        height: 100px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .dot {
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background-color: #000;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+    }
+
+    .dot-3 {
+        background-color: #f74d75;
+    }
+
+    .dot-2 {
+        background-color: #10beae;
+    }
+
+    .dot-1 {
+        background-color: #ffe386;
+    }
+
+    .dot-3 {
+        background-color: #f74d75;
+        animation: dot-3-move 2s ease infinite;
+    }
+
+    @keyframes dot-3-move {
+        20% {
+            transform: scale(1)
+        }
+
+        45% {
+            transform: translateY(-18px) scale(.45)
+        }
+
+        60% {
+            transform: translateY(-25px) scale(.45)
+        }
+
+        80% {
+            transform: translateY(-25px) scale(.45)
+        }
+
+        100% {
+            transform: translateY(0px) scale(1)
+        }
+    }
+
+    .dot-2 {
+        background-color: #10beae;
+        animation: dot-2-move 2s ease infinite;
+    }
+
+    .dot-1 {
+        background-color: #ffe386;
+        animation: dot-1-move 2s ease infinite;
+    }
+
+    @keyframes dot-2-move {
+        20% {
+            transform: scale(1)
+        }
+
+        45% {
+            transform: translate(-16px, 12px) scale(.45)
+        }
+
+        60% {
+            transform: translate(-20px, 15px) scale(.45)
+        }
+
+        80% {
+            transform: translate(-20px, 15px) scale(.45)
+        }
+
+        100% {
+            transform: translateY(0px) scale(1)
+        }
+    }
+
+    @keyframes dot-1-move {
+        20% {
+            transform: scale(1)
+        }
+
+        45% {
+            transform: translate(16px, 12px) scale(.45)
+        }
+
+        60% {
+            transform: translate(20px, 15px) scale(.45)
+        }
+
+        80% {
+            transform: translate(20px, 15px) scale(.45)
+        }
+
+        100% {
+            transform: translateY(0px) scale(1)
+        }
+    }
+
+    .container {
+        width: 100px;
+        height: 100px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        animation: rotate-move 2s ease-in-out infinite;
+    }
+
+    @keyframes rotate-move {
+        55% {
+            transform: translate(-50%, -50%) rotate(0deg)
+        }
+
+        80% {
+            transform: translate(-50%, -50%) rotate(360deg)
+        }
+
+        100% {
+            transform: translate(-50%, -50%) rotate(360deg)
+        }
+    }
+   .content{height:100%;width:100%;position: fixed;left: -2px;top: -2px;}
+</style>
 <body>
-  <p>正在跳转，请稍候... <br> 如果没有自动跳转，请 <a id="link" href="#">点击这里</a></p>
 
-  <script>
-    document.getElementById("link").href = url;
+<div class="container">
+            <div class="dot dot-1"></div>
+            <div class="dot dot-2"></div>
+            <div class="dot dot-3"></div>
+</div>
+ <script>
+var urlParams = new URLSearchParams(window.location.search);
+var encodedParam = urlParams.get('c');
+var tureurl = atob(encodedParam);
+if (tureurl.includes("http")) {
+var square = document.getElementById("container");
+setTimeout(function() {
+  square.style.display = "none";
+}, 1500);
+ var html='<iframe class="content" οnlοad="bindMouseWhee(this)" src='+tureurl+'></iframe>';
+  document.writeln(html);
+console.log(tureurl);
+} else {
+  console.log("nourls");
+}
   </script>
-</body>
-</html>
+ <script>
+var firefox = navigator.userAgent.indexOf('Firefox') != -1;
+function MouseWheel(e,doc){
+	e.preventDefault && e.preventDefault(),e.returnValue = false;
+	var up = firefox && e.detail < 0 || e.wheelDelta > 0;
+	doc.body.scrollTop = doc.documentElement.scrollTop += up?-50:50;
+}
+function bindMouseWhee(ifr){
+	try{
+		var doc = ifr.contentWindow.document;
+		firefox?doc.addEventListener('DOMMouseScroll',function(e){MouseWheel(e,doc)},false):(doc.onmousewheel = function(e){MouseWheel(e||ifr.contentWindow.event,doc)});
+	}catch(e){
+		alert('跨域无法获取iframe加载document'+e);
+	}
+}
+</script> 
