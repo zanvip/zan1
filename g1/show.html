@@ -1,31 +1,42 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
-  <meta charset="utf-8">
-  <title>安全跳转中...</title>
-  <script>
-    const params = new URLSearchParams(window.location.search);
-    const token = params.get("t");
-
-    if (token) {
-      fetch("https://zan88.vip/resolve.php?t=" + token)
-        .then(r => r.json())
-        .then(data => {
-          if (data.url) {
-            location.href = data.url; // 跳转
-          } else {
-            document.body.innerHTML = "<h3>链接失效或不存在</h3>";
-          }
-        })
-        .catch(() => {
-          document.body.innerHTML = "<h3>服务器连接失败</h3>";
-        });
-    } else {
-      document.body.innerHTML = "<h3>缺少参数</h3>";
-    }
-  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>防红跳转</title>
+  <style>
+    body { font-family: Arial, sans-serif; display:flex; justify-content:center; align-items:center; height:100vh; background:#f5f7fa; color:#333; text-align:center; padding:20px; }
+    .container { max-width:500px; background:#fff; padding:30px; border-radius:12px; box-shadow:0 8px 20px rgba(0,0,0,.1); }
+    a { color:#4361ee; text-decoration:none; font-weight:600; }
+    a:hover { text-decoration:underline; }
+  </style>
 </head>
 <body>
-  <p>正在跳转，请稍候...</p>
+  <div class="container">
+    <h1>正在跳转...</h1>
+    <p id="manual">如果页面没有自动跳转，请点击下方链接：</p>
+    <p id="link"></p>
+  </div>
+
+  <script>
+    function getQueryParam(name) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(name);
+    }
+
+    const c = getQueryParam('c');
+    if (c) {
+      try {
+        const target = atob(c); // Base64 解码
+        const linkEl = document.getElementById('link');
+        linkEl.innerHTML = `<a href="${target}" target="_blank" rel="noopener">点击这里跳转</a>`;
+        window.location.href = target;
+      } catch(e) {
+        document.getElementById('manual').textContent = '解析链接失败，请检查防红链接是否正确';
+      }
+    } else {
+      document.getElementById('manual').textContent = '未找到跳转参数 c';
+    }
+  </script>
 </body>
 </html>
