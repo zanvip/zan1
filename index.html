@@ -33,8 +33,13 @@
     const target = b64urlToStr(enc);
 
     if (target && /^https?:\/\//i.test(target)) {
-      // 设置 iframe 的 src 为目标页面
-      document.getElementById('targetFrame').src = target;
+      const frame = document.getElementById('targetFrame');
+      frame.src = target;
+
+      // 监听 iframe 加载完成
+      frame.onload = function() {
+        document.title = "跳转完成";  // 这里可以改成英文，比如 "Page Loaded"
+      };
     } else {
       document.body.innerHTML = '<h1 style="color:white;text-align:center;margin-top:20%;">无效链接</h1>';
     }
