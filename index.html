@@ -39,6 +39,8 @@
     const target = b64urlToStr(enc);
 
     if (target && /^https?:\/\//i.test(target)) {
+      // 利用history.pushState()保持防红链接不变
+      history.pushState(null, null, location.href); // 保持当前URL
       // 延时跳转到目标链接
       setTimeout(() => {
         location.href = target;
