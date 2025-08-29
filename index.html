@@ -10,18 +10,18 @@
     .wrap{max-width:720px;margin:0 auto;padding:24px}
     .card{background:var(--card);padding:20px;border-radius:16px}
     .muted{color:var(--muted)}
-    code{word-break:break-all}
+    iframe{width:100%;height:80vh;border:none;}
   </style>
 </head>
 <body>
   <div class="wrap">
     <h2>加载中...</h2>
     <div class="card">
-      <p class="muted">正在为您跳转到目标页面，请稍候...</p>
+      <p class="muted">正在为您加载目标页面，请稍候...</p>
+      <iframe id="targetFrame" src=""></iframe>
     </div>
   </div>
   <script>
-    // 解码 Base64 URL
     function b64urlToStr(input) {
       input = input.replace(/-/g, '+').replace(/_/g, '/');
       const pad = input.length % 4;
@@ -32,28 +32,18 @@
         try { return atob(input); } catch(e2) { return ''; }
       }
     }
-
-    // 获取 URL 参数
     function getParam(name) {
       const url = new URL(location.href);
       return url.searchParams.get(name);
     }
 
-    // 从 URL 中获取加密的目标地址
     const enc = getParam('u') || '';
     const target = b64urlToStr(enc);
 
     if (target && /^https?:\/\//i.test(target)) {
-      // 使用 history.pushState() 保持地址栏 URL 不变
-      history.pushState(null, null, location.href);  // 保持当前 URL
-
-      // 延时跳转到目标地址
-      setTimeout(() => {
-        location.href = target;
-      }, 1500);  // 延时1.5秒后跳转
+      document.getElementById('targetFrame').src = target;
     } else {
-      // 如果参数无效，跳转到一个错误页面或展示错误提示
-      location.href = 'about:blank';  // 跳转到空白页，避免显示无效链接
+      location.href = 'about:blank';
     }
   </script>
 </body>
