@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>外部链接跳转</title>
+  <title>加载中...</title>
   <style>
     :root { --bg:#0b1020; --card:#121a2b; --text:#e8eefc; --muted:#a8b3cf; --accent:#4c8bf5; }
     body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;background:var(--bg);color:var(--text)}
@@ -16,12 +16,10 @@
 </head>
 <body>
   <div class="wrap">
-    <h2>即将前往外部页面</h2>
+    <h2>加载中...</h2>
     <div class="card">
-      <p class="muted">为保障用户体验与合规，我们设置了中转提示。请确认是否继续访问目标链接：</p>
+      <p class="muted">正在为您跳转到目标页面，请稍候...</p>
       <p><strong>目标地址：</strong> <code id="target">（解析中…）</code></p>
-      <p class="muted">本页面不会规避任何平台的安全策略；请仅用于合法、合规的用途。</p>
-      <p><button id="go">继续访问</button></p>
     </div>
   </div>
   <script>
@@ -44,12 +42,12 @@
     const el = document.getElementById('target');
     if (target && /^https?:\/\//i.test(target)) {
       el.textContent = target;
-      document.getElementById('go').onclick = () => {
+      // 自动跳转到目标链接
+      setTimeout(() => {
         location.href = target;
-      };
+      }, 1500);  // 延时1.5秒后跳转
     } else {
       el.textContent = '参数缺失或无效';
-      document.getElementById('go').disabled = true;
     }
   </script>
 </body>
