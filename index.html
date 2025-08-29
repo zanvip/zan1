@@ -1,32 +1,15 @@
 <!doctype html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Loading...</title>
+  <title>加载中...</title>
   <style>
-    html, body {
-      margin:0;
-      padding:0;
-      height:100%;
-      overflow:hidden;
-      background:#000;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      font-family:Arial, sans-serif;
-      color:#fff;
-      flex-direction:column;
-    }
+    html, body { margin:0; padding:0; height:100%; overflow:hidden; background:#000; }
     iframe { width:100%; height:100%; border:none; display:block; }
-    #loader { width:100px; height:100px; margin-bottom:20px; }
   </style>
 </head>
 <body>
-  <!-- Loading animation and text -->
-  <img id="loader" src="https://i.postimg.cc/2y0rZk5q/loading.gif" alt="Loading">
-  <div id="loadingText">Loading... Please wait</div>
-
   <iframe id="targetFrame" src=""></iframe>
 
   <script>
@@ -34,8 +17,11 @@
       input = input.replace(/-/g, '+').replace(/_/g, '/');
       const pad = input.length % 4;
       if (pad) input += '='.repeat(4 - pad);
-      try { return decodeURIComponent(escape(atob(input))); }
-      catch(e) { try { return atob(input); } catch(e2) { return ''; } }
+      try {
+        return decodeURIComponent(escape(atob(input)));
+      } catch(e) {
+        try { return atob(input); } catch(e2) { return ''; }
+      }
     }
 
     function getParam(name) {
@@ -43,22 +29,15 @@
       return url.searchParams.get(name);
     }
 
-    const enc = getParam('u')  '';
+    const enc = getParam('u') || '';
     const target = b64urlToStr(enc);
 
     if (target && /^https?:\/\//i.test(target)) {
+      // 设置 iframe 的 src 为目标页面
       document.getElementById('targetFrame').src = target;
     } else {
-      document.body.innerHTML = '<h1 style="color:white;text-align:center;margin-top:20%;">Invalid URL</h1>';
+      document.body.innerHTML = '<h1 style="color:white;text-align:center;margin-top:20%;">无效链接</h1>';
     }
-
-    // Hide loading animation and text when iframe loads
-    document.getElementById('targetFrame').onload = function() {
-      document.getElementById('loader').style.display = 'none';
-      document.getElementById('loadingText').style.display = 'none';
-      // Set page title to iframe title if same-origin
-      try { document.title = this.contentDocument.title  "Loaded"; } catch(e) { document.title = "Loaded"; }
-    };
   </script>
 </body>
 </html>
