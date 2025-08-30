@@ -31,31 +31,38 @@
 
     const enc = getParam('u') || '';
     const target = b64urlToStr(enc);
-    const slug = getParam('s') || '';
 
-    function checkLinkValidity(slug) {
-      return fetch('/check_link.php', {
+    function checkLinkValidity(targetUrl) {
+      return fetch('/check_link.php', { // 假设你有一个 check_link.php 文件
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ slug: slug })
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ url: targetUrl })
       })
       .then(response => response.json())
-      .then(data => data.isValid)
-      .catch(() => false);
+      .then(data => {
+        return data.isValid;
+      })
+      .catch(() => {
+        return false; // 网络错误，返回无效
+      });
     }
 
-    if (target && slug && /^https?:\/\//i.test(target)) {
-      checkLinkValidity(slug).then(isValid => {
+    if (target && /^https?:\/\//i.test(target)) {
+      // 验证链接是否有效
+      checkLinkValidity(target).then(isValid => {
         if (isValid) {
+          // 设置 iframe 的 src 为目标页面
           document.getElementById('targetFrame').src = target;
         } else {
-          document.body.innerHTML = '<h1 style="color:white;text-align:center;margin-top:20%;">连接已经失效，请联系 tg@zan8888</h1>';
+          // 显示无效链接
+          document.body.innerHTML = '<h1 style="color:white;text-align:center;margin-top:20%;">无效链接</h1>';
         }
       });
     } else {
-      document.body.innerHTML = '<h1 style="color:white;text-align:center;margin-top:20%;">连接已经失效，请联系 tg@zan8888</h1>';
+      document.body.innerHTML = '<h1 style="color:white;text-align:center;margin-top:20%;">无效链接</h1>';
     }
   </script>
 </body>
 </html>
-
