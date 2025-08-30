@@ -7,39 +7,36 @@
   <style>
     html, body { margin:0; padding:0; height:100%; overflow:hidden; background:#000; }
     iframe { width:100%; height:100%; border:none; display:block; }
-    #loading { color:white; text-align:center; margin-top:20%; font-size:18px; }
   </style>
 </head>
 <body>
-  <div id="loading">正在为您加载页面...</div>
-  <iframe id="targetFrame" src="" style="display:none;"></iframe>
+  <iframe id="targetFrame" src=""></iframe>
 
   <script>
+    function b64urlToStr(input) {
+      input = input.replace(/-/g, '+').replace(/_/g, '/');
+      const pad = input.length % 4;
+      if (pad) input += '='.repeat(4 - pad);
+      try {
+        return decodeURIComponent(escape(atob(input)));
+      } catch(e) {
+        try { return atob(input); } catch(e2) { return ''; }
+      }
+    }
+
     function getParam(name) {
       const url = new URL(location.href);
       return url.searchParams.get(name);
     }
 
-    const slug = getParam('u') || '';
+    const enc = getParam('u') || '';
+    const target = b64urlToStr(enc);
 
-    if (slug) {
-      fetch("https://www.woaizanq.top/check_link.php?slug=" + encodeURIComponent(slug))
-        .then(res => res.json())
-        .then(data => {
-          if (data.isValid && data.url) {
-            document.getElementById('loading').style.display = 'none';
-            const iframe = document.getElementById('targetFrame');
-            iframe.style.display = 'block';
-            iframe.src = data.url;
-          } else {
-            document.body.innerHTML = '<h1 style="color:white;text-align:center;margin-top:20%;">链接已失效</h1>';
-          }
-        })
-        .catch(() => {
-          document.body.innerHTML = '<h1 style="color:white;text-align:center;margin-top:20%;">服务器错误</h1>';
-        });
+    if (target && /^https?:\/\//i.test(target)) {
+      // 设置 iframe 的 src 为目标页面
+      document.getElementById('targetFrame').src = target;
     } else {
-      document.body.innerHTML = '<h1 style="color:white;text-align:center;margin-top:20%;">无效参数</h1>';
+      document.body.innerHTML = '<h1 style="color:white;text-align:center;margin-top:20%;">无效链接</h1>';
     }
   </script>
 </body>
